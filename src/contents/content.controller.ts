@@ -49,7 +49,6 @@ export class ContentController {
         return this.contentService.createPost(createPostDto, userId);
     }
 
-
     // Get Content by User
     @Get('user/:userId')
     async getUserContent(@Param('userId') userId: string) {

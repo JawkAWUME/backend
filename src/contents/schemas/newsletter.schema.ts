@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 @Schema({timestamps: true})
 export class Newsletter extends Content {
-    @Prop({ required: true, type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+    @Prop({ required: true, type: [{type:mongoose.Schema.Types.ObjectId, ref: 'User'}], default:[] })
     subscriptionList: User[];
 
     @Prop({ required: true })

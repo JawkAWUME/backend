@@ -31,7 +31,6 @@ const generateTestNewsletters = async () => {
             const randomUser = users[Math.floor(Math.random()* users.length)];
 
             newsletters.push({
-                _tempId: faker.string.uuid(),
                 title: faker.lorem.sentence(),
                 topic: faker.lorem.word(),
                 body: faker.lorem.paragraphs(4),
@@ -44,6 +43,7 @@ const generateTestNewsletters = async () => {
                 isSent: faker.datatype.boolean(),
                 newsletterType: faker.helpers.arrayElement(['informative', 'promotional', 'transactional']),
                 author: randomUser._id,
+                userId: randomUser._id,
             });
         }
         
@@ -53,15 +53,9 @@ const generateTestNewsletters = async () => {
 
         for (const [index, newsletter] of newsletters.entries()) {
             try {
-                const {_tempId, subscriptionList,...newsletterData} = newsletter;
+                const res = await api.post(NEWSLETTERS_ENDPOINT, newsletter);
 
-                const res = await api.post(NEWSLETTERS_ENDPOINT, newsletterData);
-                const mongoId = res.data._id;
-
-                tempIdToMongoIdMap.set(_tempId, mongoId);
-                newsletter._realId = mongoId;
-
-                console.log(` [${index + 1}] Newsletter "${newsletter.title}" créée avec ID: ${mongoId}`)
+                console.log(` [${index + 1}] Newsletter "${newsletter.title}" créée`)
             } catch (error) {
                 console.error(`\n Erreur lors de la création de la newsletter "${newsletter.title}" (index ${index})`);
                 handleError(error);

@@ -6,13 +6,12 @@ import { Comment } from "src/contents/schemas/comment.schema";
 
 @Schema({timestamps: true})
 export class Posts extends Content {
-    @Prop({ required: true})
-    platform: string;
+    
 
-    @Prop({ required : true, type: mongoose.Schema.Types.ObjectId, ref: 'User'})
+    @Prop({ required : true, type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], default: []})
     shares: User[];
 
-    @Prop({ required : true, type: mongoose.Schema.Types.ObjectId, ref: 'Comment'})
+    @Prop({ required : true, type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],default: []})
     comments: Comment[];
 
     @Prop({ type: [String], default: [] })

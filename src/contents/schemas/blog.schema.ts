@@ -1,7 +1,8 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Content } from "./content.schema";
 import mongoose from "mongoose";
 
+@Schema({timestamps:true})
 export class Blog extends Content {
     @Prop({ type: [String], default: [] })
     tags: string[];

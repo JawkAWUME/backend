@@ -5,7 +5,8 @@ import { Review } from "./review.schema";
 import { Report } from "./report.schema";
 
 
-export abstract class Content extends Document {
+@Schema({timestamps:true})
+export class Content extends Document {
     @Prop({required: true})
     title?: string;
 
@@ -27,9 +28,6 @@ export abstract class Content extends Document {
     @Prop({ required : true, type: mongoose.Schema.Types.ObjectId, ref: 'User'})
     author: User;
 
-    @Prop({ required: true})
-    contentTypes: string[];
-
     @Prop({ required: true, default: Date.now})
     createdAt: Date;
 
@@ -39,3 +37,5 @@ export abstract class Content extends Document {
     @Prop({ required : true, type: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}], default: []})
     views: User[];
 }
+
+export const ContentSchema = SchemaFactory.createForClass(Content) 

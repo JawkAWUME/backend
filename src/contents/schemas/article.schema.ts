@@ -1,9 +1,11 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Content } from "./content.schema";
 
+
+@Schema({timestamps:true})
 export class Article extends Content {
-    @Prop({ required: true })
-    authorName: string;
+    @Prop({ default: null})
+    authorName?: string;
 
     @Prop({ default: 0})
     readTime: number;

@@ -11,7 +11,7 @@ const generateTestArticles = async () => {
     try {
         const usersResponse = await axios.get(USERS_API,{
             headers: {
-                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFmaSBBYnJhIEtwYWtwbyIsInN1YiI6IjY3ZTNlYTEzNjZhYThlNDQ5MTNmYjZiZCIsImlhdCI6MTc0NDI4MzgwNywiZXhwIjoxNzQ0MzE2MjA3fQ.BfcnLT68Ev4IwwUzcQlkAOGbdDziLKJSZtanQmak_sE",
+                Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1hcmlhbSBNYXJpYW0gQ29uZMOpIiwic3ViIjoiNjdmN2Q5ZDFiN2ZmZjhmOTE4MmE2YWNkIiwiaWF0IjoxNzQ0Mjk2NzkzLCJleHAiOjE3NDQzMjkxOTN9.AC1QjRZfCzSgJDhhWNpm3y1WiGQegufI-BUZDMJBwcE",
             }
         });
         const users = usersResponse.data;
@@ -32,6 +32,7 @@ const generateTestArticles = async () => {
                 author: randomUser._id,
                 createdAt: new Date(),
                 userId: randomUser._id,
+                readTime:  faker.number.int({ min: 5, max: 120 }),
                 likes: [],
                 views: [],
             };
